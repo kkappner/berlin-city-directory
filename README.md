@@ -95,8 +95,8 @@ The algorithm parses line content into names, occupations, proprietory status in
 ```
 >>> recognized_occupations = []
 >>> for line in cdbook.pages[8].columns[2].lines:
->>>     line.parsed_entry.categories['occupations']
->>>     recognized_occupations.extend(line.parsed_entry.categories['occupations'])
+>>>     occs = line.parsed_entry.categories['occupations']
+>>>     recognized_occupations.extend(occs)
 >>> recognized_occupations[:15]
 ['Co', 'Gebr .', 'Fbrk .', 'Ww', 'Rent', 'Kfm .', 'Seifenſieder .', 'Kfm .', 'Fbrk .', 'Kim .', 'Kfm .', 'Co', 'Strumpfwrn . Geſch .', 'Ger. Aktuar a. D.', 'Reſtaur . Feuermeldeſtelle .']
 ```
