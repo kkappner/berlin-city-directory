@@ -149,3 +149,5 @@ To prepare the structured data, we convert it into a DataFrame, dropping all non
 ```
 
 ## Geo- and status-referencing
+
+## Validation (Stata code)
