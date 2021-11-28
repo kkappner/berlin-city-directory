@@ -150,4 +150,77 @@ To prepare the structured data, we convert it into a DataFrame, dropping all non
 
 ## Geo- and status-referencing
 
+The DataFrame produced above contains city directory entries with occupations and addresses. Next, we want to reference these entries in the [HISCO](https://iisg.amsterdam/en/data/data-websites/history-of-work) occupational classification scheme and translate address strings into latitude-longitude coordinates. The various files used in the geo- and status-referencing process are available in the 'referencing' directory.
+
+```python
+>>> import cd_referencing
+
+#To economize, we only reference unique addresses and occupations.
+>>> addresses = list(df['street'].fillna('') + ' ' + df['number'].fillna(''))
+>>> addresses_unique = list(dict.fromkeys(addresses))
+>>> occupations = list(df['occupation'])
+>>> occupations_unique = list(dict.fromkeys(occupations))
+
+>>> len(addresses)
+5237
+>>> len(addresses_unique)
+448
+
+#Later, we use a couple of functions to map the coordinates and HISCO codes of unique addresses and occupations back the full set of observations.
+>>> gatd = cd_referencing.generate_add_translation_dict
+>>> ratd = cd_referencing.read_from_add_translation_dict
+>>> gotd = cd_referencing.generate_occ_translation_dict
+>>> rotd = cd_referencing.read_from_occ_translation_dict
+```
+
+Our three geo-referencing approaches:
+
+```python
+#Fully-automatic geo-referencing via some geocoding API. 
+>>> xs, ys = cd_referencing.georef_automatic(addresses_unique, trail=', Berlin, Germany')
+>>> tdict = gatd(addresses_unique, xs, ys)
+>>> df[['x_1', 'y_1']] = df.apply(lambda x: ratd(f"{x['street']} {x['number']}", tdict), axis=1, result_type='expand')
+
+#Semi-automatic geo-referencing via a shapefile of street linestrings. 
+#Note: We need to reproject the streets shapefile to WGS 84 (EPSG:4326).
+>>> path_streets = os.path.join('referencing', 'streets_1880.shp')
+>>> xs, ys = cd_referencing.georef_semiautomatic(addresses_unique, path_streets, reproject=4326)
+>>> tdict = gatd(addresses_unique, xs, ys)
+>>> df[['x_2', 'y_2']] = df.apply(lambda x: ratd(f"{x['street']} {x['number']}", tdict), axis=1, result_type='expand')
+
+#Manual geo-referencing via a shapefile of lot polygons (alternatively, pass a points shapefile).
+>>> path_plots = os.path.join('referencing', 'lots_1880.gpkg')
+>>> xs, ys = cd_referencing.georef_manual(addresses_unique, path_plots, reproject=4326, polygons=True)   
+>>> tdict = gatd(addresses_unique, xs, ys)
+>>> df[['x_3', 'y_3']] = df.apply(lambda x: ratd(f"{x['street']} {x['number']}", tdict), axis=1, result_type='expand')
+```
+
+Our three status-referencing approaches:
+
+```python
+#Fully-automatic status-referencing, searching for a close match within the current HISCO database.
+#Note: We use a local csv table; alternatively query the occupations online from the HISCO website.
+>>> path_occs = os.path.join('referencing', 'hisco_table_oct2021.csv')
+>>> unique_hiscos = cd_referencing.statusref_automatic(occupations_unique, path_occs, online=False)
+>>> tdict = gotd(occupations_unique, unique_hiscos)
+>>> hiscos = df.apply(lambda x: rotd(x['occupation'], tdict), axis=1)
+
+#Semi-automatic status-referencing, searching for a close match within the list of occupations published in the 1882 Prussian occupational census.
+
+#Automatic status-referencing
+
+```
+
+We still need to translate [HISCO](https://iisg.amsterdam/en/data/data-websites/history-of-work) codes to [HISCAM](http://www.hisma.org/HISMA/HISCAM.html) social status scale values.
+
+```python
+>>> path_hiscam = os.path.join('referencing', 'hiscam_u2.csv')
+>>> df_hiscam = pd.read_csv(path_hiscam, engine='python', sep=',')
+>>> dict_hiscam = pd.Series(df_hiscam['HISCAM'].values, index=df_hiscam['HISCO']).to_dict()
+>>> dict_hiscam = {str(key).zfill(5):val for key, val in dict_hiscam.items()}
+>>> df['hiscam_1'] = [dict_hiscam.get(x) for x in hiscos]
+>>> df['hiscam_2'] = [dict_hiscam.get(x) for x in hiscos]
+>>> df['hiscam_3'] = [dict_hiscam.get(x) for x in hiscos]
+```
+
 ## Validation (Stata code)
