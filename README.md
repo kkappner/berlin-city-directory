@@ -69,7 +69,7 @@ Page | Column | Line | Street
 9      3        57     Alexandrinenſtraße
 ```
 
-The algorithm did a reasonable job, though it failed to identify [Albrechtſtraße](https://digital.zlb.de/viewer/image/34115512_1880/1147/). If needed, this can be corrected manually, either by passing the desired string or by searching for a close match with a lower treshhold.
+The algorithm did a reasonable job, though it failed to identify [Albrechtſtraße](https://digital.zlb.de/viewer/image/34115512_1880/1147/). If needed, this can be corrected manually, either by passing the desired string or by searching for a close match with a lower threshold.
 
 ```python
 >>> cdbook.pages[6].columns[5].lines[30]
