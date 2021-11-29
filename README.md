@@ -99,7 +99,7 @@ To structure the content *within* each text line, we use an adapted version of t
 ```python
 >>> from cd_entryparsing import Classifier
 
->>> training_data_csv = os.path.join(path_training, 'training_ab1873_p4u25v2.csv')
+>>> training_data_csv = os.path.join('bcdextract, 'training', 'training.csv')
 
 #Create a classifier for entry parsing.
 >>> classifier = Classifier()
