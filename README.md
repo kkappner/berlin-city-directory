@@ -54,11 +54,7 @@ To structure the OCR'd text content, we identify lines that announce street name
 >>>        col.find_lines_with_street_numbers()
 >>>        col.tag_indented_lines(inflate_std=.5, ignore_nonstd_lines=True)
 >>>        col.consolidate_indented_lines()
-```
 
-The algorithm did a reasonable job, though it failed to identify [Albrechtſtraße](https://digital.zlb.de/viewer/image/34115512_1880/1147/). If needed, this can be corrected manually, either by passing the desired string or by searching for a close match with a lower treshhold.
-
-```python
 >>> cdbook.list_streets()
 Page | Column | Line | Street
 0      0        0      Ackerſtraße
@@ -71,7 +67,11 @@ Page | Column | Line | Street
 9      0        8      Kleine Alexanderſtraße
 9      3        54     Alexander Ufer
 9      3        57     Alexandrinenſtraße
+```
 
+The algorithm did a reasonable job, though it failed to identify [Albrechtſtraße](https://digital.zlb.de/viewer/image/34115512_1880/1147/). If needed, this can be corrected manually, either by passing the desired string or by searching for a close match with a lower treshhold.
+
+```python
 >>> cdbook.pages[6].columns[5].lines[30]
 Albrechtſtr. (NW)
 >>> cdbook.pages[6].columns[5].lines[30].tag_as_street_name(street_list=street_list, difflib_cutoff=.5)
