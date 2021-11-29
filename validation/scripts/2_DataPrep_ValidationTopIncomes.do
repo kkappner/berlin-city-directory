@@ -154,12 +154,12 @@ gen Territory="Berlin"
 
 *** Save data
 keep id i_1 i_2 i_3 i_4 i_5 i_6 i_7 i_8 i_9 i_10 i_11 i_12 i_13 s_i_1 s_i_2 s_i_3 s_i_4 s_i_5 s_i_6 s_i_7 s_i_8 s_i_9 s_i_10 s_i_11 s_i_12 s_i_13 w_1 w_2 w_3 w_4 w_5 w_6 w_7 w_8 w_9 w_10 w_11 w_12 w_13 indi_total  Wealth_total
-save "$rootfolder/Work/Temp/classfied_tax_data", replace
+save "$temp/classfied_tax_data", replace
 				
 *** Do gpinter for top-1 share  
 levelsof id, local(BEZIRK)
 foreach B of local BEZIRK{
-	use "$rootfolder/Work/Temp/classfied_tax_data", clear
+	use "$temp/classfied_tax_data", clear
 	keep if id==`B'
 
 	order indi_total  Wealth_total
@@ -230,7 +230,7 @@ foreach B of local BEZIRK{
 	*** Calculate counterfactual top-1
 	*** Run pareto interpolation 
 	
-	do "$rootfolder/Work/Scripts/AuxDo/_TA_run_paretoinR" 
+	do "$scripts/AuxDo/_TA_run_paretoinR" 
  
 	keep if p>.29  & p<=.99
 	
@@ -243,7 +243,7 @@ foreach B of local BEZIRK{
 
 	reshape wide top_share, i(id) j(p)
 	
-	save "$rootfolder/Work/Temp/topshares_`B'" , replace
+	save "$temp/topshares_`B'" , replace
 	
 	}
 
@@ -251,7 +251,7 @@ levelsof id, local(BEZIRK)
 clear
 
 foreach B of local BEZIRK{
-	append using "$rootfolder/Work/Temp/topshares_`B'"
+	append using "$temp/topshares_`B'"
 	}
 
-save "$rootfolder/Work/Temp/top_shares_BERLIN", replace 
+save "$temp/top_shares_BERLIN", replace 
