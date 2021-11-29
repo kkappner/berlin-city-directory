@@ -7,6 +7,8 @@ Documentation of OCR output parsing (Python)
 Documentation of referencing (Python)
 Documentation of paper replication files (Stata)
 
+Depending on the functions you want to use, you need pandas, geopandas, numpy, geocoder BeautifulSoup, shapely, sklearn_crfsuite (Python), and for Stata a customized program.
+
 ## OCR via OCR4all
 
 We use [OCR4all](https://github.com/OCR4all/OCR4all) to recognize household entries listed in the [1880 Berlin city directory](https://digital.zlb.de/viewer/image/34115512_1880/1141/). For enhance recognition, we trained a model on the first 50 pages of the [1875 directory](https://digital.zlb.de/viewer/image/34115512_1875/1066/). You can find the resulting OCR model in the *ocr_model* directory.
