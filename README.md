@@ -244,4 +244,4 @@ We still need to translate [HISCO](https://iisg.amsterdam/en/data/data-websites/
 
 ## Validation (Stata code)
 
-The *validation/scripts* directory contains Stata code and files to reproduce the figures and estimates in our paper based on the fully referenced [1880 Berlin city directory](https://digital.zlb.de/viewer/image/34115512_1880/1141/). To run this code, adjust the directory paths in *scripts/0_Master.do* and run the do file.
+The *validation/scripts* directory contains Stata code and files to reproduce the figures and estimates in our paper based on the fully referenced [1880 Berlin city directory](https://digital.zlb.de/viewer/image/34115512_1880/1141/). To run this code, adjust the directory paths in *validation/scripts/0_Master.do* and run the do file.
