@@ -42,7 +42,7 @@ CDBook [10 pages, 60 columns, 5869 lines]
 1. a. d. Linienſtr.
 ```
 
-To structure the OCR'd text content, we identify lines that announce street names and street numbers, and tag and consolidate indented lines. These operations are performed at the column level because the underlying functions exploit statistics computed over all bounding boxes within a given column. By passing a list of expected street names, e.g. from [here](https://digital.zlb.de/viewer/image/34115512_1880/1840/LOG_0148/), we help our algorithm to identify lines announcing street names more reliably.
+To structure the OCR'd text content, we identify lines that announce street names and street numbers, and tag and consolidate indented lines. These operations are performed at the column level because the underlying functions exploit statistics computed over all bounding boxes within a given column. By optionally passing a list of expected street names, e.g. from [here](https://digital.zlb.de/viewer/image/34115512_1880/1840/LOG_0148/), we help our algorithm to identify lines announcing street names more reliably.
 
 ```python
 >>> street_list = ['Ackerſtraße', 'Adalbertſtraße', 'Adlerſtraße', 'Admiralſtraße', 'Adolfſtraße', 'Ahornſtraße', 
