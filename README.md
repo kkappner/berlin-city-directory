@@ -78,7 +78,7 @@ Albrechtſtr. (NW)
 >>> cdbook.pages[6].columns[5].lines[30].tag_as_street_name(name='Albrechtſtraße')
 ```
 
-Next, we distribute the recognized street names and house numbers to all other lines. The following example output from [the third column of page 9](https://digital.zlb.de/viewer/image/34115512_1880/1149/) also illustrates that a couple of lines were accidentally consolidated.
+Next, we distribute the recognized street names and house numbers to all other lines. The following example output from [the third column of page 9](https://digital.zlb.de/viewer/image/34115512_1880/1149/) also illustrates that a couple of distinct lines were accidentally consolidated.
 
 ```python
 >>> cdbook.distribute_addresses()
