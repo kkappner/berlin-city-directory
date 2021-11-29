@@ -143,7 +143,7 @@ To prepare the structured data, we convert it into a DataFrame, dropping all non
 
 ## Geo- and status-referencing
 
-The DataFrame produced above contains city directory entries with occupations and addresses. Next, we want to reference these entries in the [HISCO](https://iisg.amsterdam/en/data/data-websites/history-of-work) occupational classification scheme and translate address strings into latitude-longitude coordinates. The various files used in the geo- and status-referencing process are available in the 'referencing' directory. The *parsing_and_referencing.py* script contains the full code for this section.
+The DataFrame produced above contains city directory entries with occupations and addresses. Next, we want to reference these entries in the [HISCO](https://iisg.amsterdam/en/data/data-websites/history-of-work) occupational classification scheme and translate address strings into latitude-longitude coordinates. The various files used in the geo- and status-referencing process are available in the *referencing* directory. The *parsing_and_referencing.py* script contains the full code for this section.
 
 ```python
 >>> import cd_referencing
