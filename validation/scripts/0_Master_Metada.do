@@ -5,31 +5,20 @@ clear all
 set more off
 
 *** Set user
-global user "Thilo"
-*global user "Thilo_HOME"
-*global user "Thilo"
+global user "USER"
 
-*** Define paths to data and scripts
-if "${user}"=="Thilo_HOME" {
-	global rootfolder 			"/Users/thiloalbers/Dropbox/!Adress books and Census data"
+*** Define paths to data and scripts for specified user
+
+if "${user}"=="USER" {
+	global rootfolder 			"/berlin-city-directory/validation/"
 	global githubfolder			"/Users/thiloalbers/GitHub/"
-	global rsuitefolder			 "/Library/Frameworks/R.framework/Versions/3.6/Resources/bin/R" 
+	global rsuitefolder			"/usr/local/bin/r" 
 	}
-	
-if "${user}"=="Thilo" {
-	global rootfolder 			"/Users/thiloalbers/Dropbox/!Adress books and Census data"
-	global githubfolder			"/Users/thiloalbers/GitHub/"
-	global rsuitefolder			 "/usr/local/bin/r" 
-	}
-	
-if "${user}"=="Kalle" {
-	global rootfolder 			"/Users/kalle/Dropbox/!Adress books and Census data"
-}
 		
-global temp 		"$rootfolder/Work/Temp"
-global scripts 		"$rootfolder/Work/Scripts"
-global rawdata 		"$rootfolder/Data"
-global output		"$rootfolder/Work/Final Output"
+global temp 		"$rootfolder/temp"
+global scripts 		"$rootfolder/scripts"
+global rawdata 		"$rootfolder/data"
+global output		"$rootfolder/final output"
 	 	
 *** Store figures in final output directory
 cd "$rootfolder/Work/Final Output"
@@ -62,8 +51,3 @@ cd "$rootfolder/Work/Final Output"
 	* tables and figures
 		do	"$scripts/3_DirectorySpread.do"
 		do	"$scripts/4_Validation.do"
-	
-	
-	
-	
-	
