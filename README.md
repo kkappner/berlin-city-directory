@@ -186,16 +186,23 @@ Our three status-referencing approaches:
 
 ```python
 #Fully-automatic status-referencing, searching for a close match within the current HISCO database.
-#Note: We use a local csv table; alternatively query the occupations online from the HISCO website.
->>> path_occs = os.path.join('referencing', 'hisco_table_oct2021.csv')
->>> unique_hiscos = cd_referencing.statusref_automatic(occupations_unique, path_occs, online=False)
+#Note: We use a local csv table containing the scraped HISCO database; alternatively query the occupations online from the HISCO website using cd_referencing.statusref_online().
+>>> path_occs = os.path.join('referencing', 'occupations_hiscowebsite.csv')
+>>> unique_hiscos = cd_referencing.statusref_offline(occupations_unique, path_occs, difflib_cutoff=.75, verbose=True)
 >>> tdict = gotd(occupations_unique, unique_hiscos)
->>> hiscos = df.apply(lambda x: rotd(x['occupation'], tdict), axis=1)
+>>> df['hisco_1'] = df.apply(lambda x: rotd(x['occupation'], tdict), axis=1)
 
 #Semi-automatic status-referencing, searching for a close match within the list of occupations published in the 1882 Prussian occupational census.
+>>> path_occs = os.path.join('referencing', 'occupations_census.csv')
+>>> unique_hiscos = cd_referencing.statusref_offline(occupations_unique, path_occs, difflib_cutoff=.75, verbose=True)
+>>> tdict = gotd(occupations_unique, unique_hiscos)
+>>> df['hisco_2'] = df.apply(lambda x: rotd(x['occupation'], tdict), axis=1)
 
-#Automatic status-referencing
-
+#Manual status-referencing, searching for a close match within a handcoded list of German occupations.
+>>> path_occs = os.path.join('referencing', 'occupations_handcoded.csv')
+>>> unique_hiscos = cd_referencing.statusref_offline(occupations_unique, path_occs, difflib_cutoff=.75, verbose=True)
+>>> tdict = gotd(occupations_unique, unique_hiscos)
+>>> df['hisco_3'] = df.apply(lambda x: rotd(x['occupation'], tdict), axis=1)
 ```
 
 We still need to translate [HISCO](https://iisg.amsterdam/en/data/data-websites/history-of-work) codes to [HISCAM](http://www.hisma.org/HISMA/HISCAM.html) social status scale values.
@@ -205,9 +212,30 @@ We still need to translate [HISCO](https://iisg.amsterdam/en/data/data-websites/
 >>> df_hiscam = pd.read_csv(path_hiscam, engine='python', sep=',')
 >>> dict_hiscam = pd.Series(df_hiscam['HISCAM'].values, index=df_hiscam['HISCO']).to_dict()
 >>> dict_hiscam = {str(key).zfill(5):val for key, val in dict_hiscam.items()}
->>> df['hiscam_1'] = [dict_hiscam.get(x) for x in hiscos]
->>> df['hiscam_2'] = [dict_hiscam.get(x) for x in hiscos]
->>> df['hiscam_3'] = [dict_hiscam.get(x) for x in hiscos]
+>>> def hiscos_to_hiscams(hiscos, dict_hiscam):
+>>>    hiscos = [str(hisco).replace('*', '') if hisco else hisco for hisco in hiscos] #HISCO website strings sometimes include a trailing asterisk.
+>>>    return [dict_hiscam.get(hisco) for hisco in hiscos]
+
+>>> for i in range(1,4):
+>>>     df[f'hiscam_{i}'] = hiscos_to_hiscams(df[f'hisco_{i}'], dict_hiscam)
+
+>>> df[['hiscam_1', 'hiscam_2', 'hiscam_3']]
+       hiscam_1  hiscam_2   hiscam_3
+0           NaN       NaN        NaN
+1     65.779999       NaN        NaN
+2           NaN       NaN        NaN
+3     50.820000     50.82  50.820000
+4           NaN       NaN        NaN
+        ...       ...        ...
+5232        NaN       NaN        NaN
+5233  50.820000     50.82  50.820000
+5234        NaN       NaN  88.220001
+5235        NaN       NaN        NaN
+5236  56.930000       NaN        NaN
+
+[5237 rows x 3 columns]
 ```
 
 ## Validation (Stata code)
+
+The `validation` directory contains Stata code to reproduce the figures and estimates in our paper.
