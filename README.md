@@ -1,6 +1,6 @@
 # Replication files and code for Albers and Kappner (2021)
 
-This repository contains replication files and code for Albers and Kappner (2021). In this example, we show how to use the extraction work flow described in the paper to convert the first 10 pages of the [1880 Berlin city directory](https://digital.zlb.de/viewer/image/34115512_1880/1141/) into a dataset of geo- and status-referenced household heads. We also provide a Stata file of the fully referenced [1880 directory](https://digital.zlb.de/viewer/image/34115512_1880/1141/) and the Stata code processing it for our validation exercises.
+This repository contains replication files and code for [Albers and Kappner (2021)](https://github.com/kkappner/berlin-city-directory/blob/main/Albers_Kappner_2021_City_Directories.pdf). In this example, we show how to use the extraction work flow described in the paper to convert the first 10 pages of the [1880 Berlin city directory](https://digital.zlb.de/viewer/image/34115512_1880/1141/) into a dataset of geo- and status-referenced household heads. We also provide a Stata file of the fully referenced [1880 directory](https://digital.zlb.de/viewer/image/34115512_1880/1141/) and the Stata code processing it for our validation exercises.
 
 List of directories and their content:
 - *bab_h_1880*: [OCR4all](https://github.com/OCR4all/OCR4all) processing and result files for the first 10 pages of the [1880 Berlin city directory](https://digital.zlb.de/viewer/image/34115512_1880/1141/).
@@ -244,4 +244,4 @@ We still need to translate [HISCO](https://iisg.amsterdam/en/data/data-websites/
 
 ## Validation (Stata code)
 
-The *validation/scripts* directory contains Stata code and files to reproduce the figures and estimates in our paper based on the fully referenced [1880 Berlin city directory](https://digital.zlb.de/viewer/image/34115512_1880/1141/). To run this code, adjust the directory paths in *validation/scripts/0_Master.do* and run the do file.
+The *validation/scripts* directory contains Stata code and files to reproduce the figures and estimates in [our paper](https://github.com/kkappner/berlin-city-directory/blob/main/Albers_Kappner_2021_City_Directories.pdf) based on the fully referenced [1880 Berlin city directory](https://digital.zlb.de/viewer/image/34115512_1880/1141/). To run this code, adjust the directory paths in *validation/scripts/0_Master.do* and run the do file.
