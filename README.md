@@ -99,10 +99,12 @@ To structure the content *within* each text line, an adapted version of the [cit
 
 >>> training_data_csv = os.path.join(path_training, 'training_ab1873_p4u25v2.csv')
 
-#Create a classifier for entry parsing
+#Create a classifier for entry parsing.
 >>> classifier = Classifier()
 >>> classifier.load_training(training_data_csv)
 >>> classifier.train()
+
+#Parse all entries.
 >>> cdbook.parse_all_entries(classifier)
 ```
 
