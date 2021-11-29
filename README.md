@@ -94,7 +94,7 @@ List of entries in column
 ...
 ```
 
-To structure the content *within* each text line, an adapted version of the [city-directory-entry-parser](https://github.com/nypl-spacetime/city-directory-entry-parser) is used. This is based ond a conditional random fields algorithm trained with customized ground truth data.
+To structure the content *within* each text line, we use an adapted version of the [city-directory-entry-parser](https://github.com/nypl-spacetime/city-directory-entry-parser). This is based ond a conditional random fields algorithm trained with customized ground truth data.
 
 ```python
 >>> from cd_entryparsing import Classifier
