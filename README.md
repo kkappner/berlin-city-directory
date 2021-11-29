@@ -238,4 +238,4 @@ We still need to translate [HISCO](https://iisg.amsterdam/en/data/data-websites/
 
 ## Validation (Stata code)
 
-The `validation` directory contains Stata code to reproduce the figures and estimates in our paper.
+The 'validation' directory contains Stata code to reproduce the figures and estimates in our paper.
