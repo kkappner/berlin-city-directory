@@ -21,7 +21,7 @@ global rawdata 		"$rootfolder/data"
 global output		"$rootfolder/final output"
 	 	
 *** Store figures in final output directory
-cd "$rootfolder/Work/Final Output"
+cd "$rootfolder/final output"
 
 
 * Necessary packages 
