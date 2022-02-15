@@ -55,7 +55,7 @@ gen R_ppl_household_klassensteuer=N_people_klassensteuer/N_taxunits_klassensteue
 **** Assume same household size of exempted as for those paying Klassensteuer
 gen N_taxunits_exempted=N_people_exempted/R_ppl_household_klassensteuer
 
-**** Generate income tax payers assuming city-wide ratio of households to tax units (for income taxpayers 
+**** Generate income tax payers assuming city-wide ratio of tax units to tax+family (for income taxpayers)
 gen N_taxunits_income=N_people_income_tax*(25200/82062)
 					
 		 
@@ -99,7 +99,7 @@ replace Income_Bezirk=INC_TU_incometax+Inc_TU_klassensteuer+INC_TU_exempted
 
 gen Inc_avg_TU_all= Income_Bezirk/( N_taxunits_exempted+N_taxunits_klassensteuer+N_taxunits_income)
 
-*** check plausibility => Average income always higher for thos paying income tax than for average 
+*** check plausibility => Average income always higher for those paying income tax than for average 
 				 { 
 						/*
 						
