@@ -230,7 +230,7 @@ forval sb_i = 1/3 {
 graph combine "$output/Figures/validation_mean_1" "$output/Figures/validation_mean_2" "$output/Figures/validation_mean_3", r(1) graphregion(color(white))   l1("Ln of average income (Reichsmark per year)", size(small)) b1("Ln of average HISCAM value", size(small)) imargin(zero)  
 graph export "$output/Figures/validation_mean_combined.pdf" , replace 
 
-*** Plot tract-level top25 share correlations (Figure 7)
+*** Plot tract-level top50 share correlations (Figure 7)
 forval sb_i = 1/3 {
 
 *** Graph titles
