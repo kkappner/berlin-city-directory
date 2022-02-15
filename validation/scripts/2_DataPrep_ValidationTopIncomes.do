@@ -227,8 +227,7 @@ foreach B of local BEZIRK{
 					
 	drop upper_bound-error_all
 																				
-	*** Calculate counterfactual top-1
-	*** Run pareto interpolation 
+	*** Run pareto interpolation using gpinter
 	
 	do "$scripts/AuxDo/_TA_run_paretoinR" 
  
