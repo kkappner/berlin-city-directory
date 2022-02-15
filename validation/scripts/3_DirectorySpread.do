@@ -119,4 +119,4 @@ twoway	( area printingpress year if printingpress == 100,  xsize(8) color(gs6)) 
 , legend(  order(3 "20 largest world cities" 4 "50 largest US cities")  size(mediumsmall) ring(0) position(2) bmargin(large) col(2)) ytitle("Proportion of cities with directories in %", size(medsmall)) ///
 bgcolor(white)  graphregion(color(white))   xtitle("Year") xlabel(1450(50)1900) text( 103 1500 "Spread of printing press", size(small)) text( 103 1770 "Spread of house numbering", size(small))  ylab(0(10)100, nogrid)
 
-graph export "$output/directory_spread.pdf", replace
+graph export "$output/Figures/directory_spread.pdf", replace
