@@ -158,6 +158,8 @@ save "$temp/classfied_tax_data", replace
 				
 *** Do gpinter for top-1 share  
 levelsof id, local(BEZIRK)
+
+preserve
 foreach B of local BEZIRK{
 	use "$temp/classfied_tax_data", clear
 	keep if id==`B'
@@ -245,6 +247,7 @@ foreach B of local BEZIRK{
 	save "$temp/topshares_`B'" , replace
 	
 	}
+restore
 
 levelsof id, local(BEZIRK)
 clear
