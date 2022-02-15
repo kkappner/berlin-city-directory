@@ -4,7 +4,7 @@
 clear  
 use "$temp/directories_Bairoch"
 
-*** top 50 US cities in 1900
+*** top 50 US cities in 1900 (yxxx denotes population in year xxxx)
 
 preserve 
 	
