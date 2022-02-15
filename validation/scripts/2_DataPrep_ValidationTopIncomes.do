@@ -149,7 +149,7 @@ gen w_12= 2820*i_12
 gen w_13= INC_TU_incometax
 
 gen indi_total=N_taxunits_exempted+N_taxunits_klassensteuer+N_taxunits_income
-rename Income_Bezirk Wealth_total
+rename Income_Bezirk Income_total
 gen Territory="Berlin"
 
 *** Save data
@@ -162,7 +162,7 @@ foreach B of local BEZIRK{
 	use "$temp/classfied_tax_data", clear
 	keep if id==`B'
 
-	order indi_total  Wealth_total
+	order indi_total  Income_total
 
 	*** Generate percentiles
 	unab vars : i_*
@@ -197,7 +197,7 @@ foreach B of local BEZIRK{
 	
 	rename average bracketavg
 	
-	gen average=Wealth_total/indi_total
+	gen average=Income_total/indi_total
 	
 	rename s_i threshold 
 	rename p_ p
