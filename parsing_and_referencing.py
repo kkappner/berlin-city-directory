@@ -15,8 +15,8 @@ import geopandas as gpd
 
 path_wdir = os.getcwd()
 path_data = os.path.join(path_wdir, 'referencing', 'data')
-path_training = os.path.join(path_wdir, 'referencing', 'training')
 path_script = os.path.join(path_wdir, 'bcdextract')
+path_training = os.path.join(path_script, 'training')
 sys.path.append(path_script)         
 from cd_datastructure import CDBook
 from cd_entryparsing import Classifier
